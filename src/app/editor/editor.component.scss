@@ -1,0 +1,31 @@
+.first-block,
+.second-block,
+.third-block {
+  display: block;
+  width: 98vw;
+  height: 39vh;
+  border: 1px solid grey;
+  border-radius: 15px 15px 0 0;
+  background-color: white;
+  box-shadow: 0px 4px 9px 0px lightgrey;
+  padding: 10px;
+  overflow: auto;
+  margin: 10px auto;
+}
+.second-block {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 10vh;
+  border-radius: 0;
+  button {
+    width: 100px;
+  }
+}
+.third-block {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 0 0 15px 15px;
+}
