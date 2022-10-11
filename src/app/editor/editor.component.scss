@@ -1,6 +1,7 @@
 .first-block,
 .second-block,
-.third-block {
+.third-block,
+.fours-block {
   display: block;
   width: 98vw;
   height: 39vh;
@@ -22,10 +23,151 @@
     width: 100px;
   }
 }
-.third-block {
+.third-block,
+.fours-block {
   display: flex;
   flex-flow: column;
   justify-content: space-evenly;
   align-items: center;
   border-radius: 0 0 15px 15px;
+}
+
+.fours-block {
+  justify-content: start;
+  width: 70vw;
+  border-radius: 15px;
+  min-height: 250px;
+  height: fit-content;
+  &__box1 {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    width: 30%;
+    height: 30px;
+  }
+  &__box2 {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+}
+.mainEditor,
+.firstEditor {
+  display: block;
+  width: 95%;
+  min-height: 76%;
+  border-radius: 5px;
+  resize: none;
+  padding: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+.firstEditor {
+  width: 99%;
+  min-height: 99%;
+  height: 99%;
+  margin: 0 auto;
+  text-align: justify;
+  font-size: 16px;
+}
+.bg-grey {
+  background-color: lightgray;
+}
+.block1,
+.block2,
+.block3 {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 365px;
+  height: 35px;
+}
+.block3 {
+  height: 100px;
+}
+.color-box,
+.bg-color-box {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 160px;
+  height: 70px;
+}
+.all-color,
+.all-bg-color {
+  cursor: pointer;
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 3px;
+  &:hover {
+    box-shadow: 0px 4px 9px 0px orange;
+  }
+}
+.all-bg-color {
+  &:hover {
+    box-shadow: 0px 4px 9px 0px red;
+  }
+}
+.color-1 {
+  background-color: cyan;
+}
+.color-2 {
+  background-color: coral;
+}
+.color-3 {
+  background-color: green;
+}
+.color-4 {
+  background-color: salmon;
+}
+.color-5 {
+  background-color: navy;
+}
+.color-6 {
+  background-color: cornflowerblue;
+}
+.color-7 {
+  background-color: bisque;
+}
+.color-8 {
+  background-color: blueviolet;
+}
+.color-9 {
+  background-color: brown;
+}
+.color-10 {
+  background-color: skyblue;
+}
+.bg-color-1 {
+  background-color: lightcyan;
+}
+.bg-color-2 {
+  background-color: lightcoral;
+}
+.bg-color-3 {
+  background-color: lightgreen;
+}
+.bg-color-4 {
+  background-color: lightsalmon;
+}
+.bg-color-5 {
+  background-color: lightsteelblue;
+}
+.bg-color-6 {
+  background-color: lightskyblue;
+}
+.bg-color-7 {
+  background-color: lightgoldenrodyellow;
+}
+.bg-color-8 {
+  background-color: lightseagreen;
+}
+.bg-color-9 {
+  background-color: lightpink;
+}
+.bg-color-10 {
+  background-color: lightyellow;
 }

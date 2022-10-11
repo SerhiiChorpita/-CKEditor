@@ -1,12 +1,233 @@
-<div class="first-block container"></div>
-<div class="second-block container">
-    <button type="button" class="btn btn-primary">Edit</button>
-    <button type="button" class="btn btn-warning">Style</button>
-</div>
-<div class="third-block container">
-    <textarea name="mainEditor" rows="3"></textarea>
-    <div>
-        <button type="button" class="btn btn-success">Save</button>
-        <button type="button" class="btn btn-info">Add</button>
+<ng-container *ngIf="!addStatus">
+    <div class="first-block container" [style.font-size]="mainStyle.textSize" [style.font-family]="mainStyle.fontFamily"
+        [style.font-weight]="mainStyle.bold?'bold':''" [style.font-style]="mainStyle.italic?'italic':''"
+        [style.color]="mainStyle.color" [style.background-color]="mainStyle.bgColor"
+        (click)="!backOfft?textColorChange():''" (click)="!backOffb?bgColorChange():''"></div>
+    <div class="second-block container" (click)="!backOfft?textColorChange():''" (click)="!backOffb?bgColorChange():''">
+        <button type="button" class="btn btn-primary"
+            (click)="checkEdit = true; checkSave = true;checkStyle = false">Edit</button>
+        <button type="button" class="btn btn-warning" (click)="checkStyle = true;checkEdit = false">Style</button>
     </div>
-</div>
+    <div [ngClass]="{'bg-grey':checkEdit == true}" class="third-block container"
+        (click)="!backOfft?textColorChange():''" (click)="!backOffb?bgColorChange():''">
+        <ng-container *ngIf="checkEdit">
+            <ng-container *ngIf="checkSave">
+                <textarea name="mainEditor" rows="3" class="mainEditor" [(ngModel)]="mainContent"></textarea>
+            </ng-container>
+            <ng-container *ngIf="!checkSave">
+                <textarea name="mainEditor" rows="3" class="mainEditor" readonly></textarea>
+            </ng-container>
+            <div>
+                <button type="button" class="btn btn-success m-1"
+                    (click)="updateFirstBlock(); checkSave = false">Save</button>
+                <button type="button" class="btn btn-info m-1" (click)="changeAddStatus()">Add</button>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="checkStyle">
+            <form #form="ngForm">
+                <div class="block1">
+                    <span>Text size:</span>
+                    <div class="form-group">
+                        <label for="12pt">
+                            <input type="radio" name="fontSize" id="12pt" value="12pt" checked
+                                [(ngModel)]="mainStyle.textSize">
+                            12pt
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="14pt">
+                            <input type="radio" name="fontSize" id="14pt" value="14pt" [(ngModel)]="mainStyle.textSize">
+                            14pt
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="16pt">
+                            <input type="radio" name="fontSize" id="16pt" value="16pt" [(ngModel)]="mainStyle.textSize">
+                            16pt
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="18pt">
+                            <input type="radio" name="fontSize" id="18pt" value="18pt" [(ngModel)]="mainStyle.textSize">
+                            18pt
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="20pt">
+                            <input type="radio" name="fontSize" id="20pt" value="20pt" [(ngModel)]="mainStyle.textSize">
+                            20pt
+                        </label>
+                    </div>
+                </div>
+                <div class="block2">
+                    <span>Font family:</span>
+                    <div class="form-group">
+                        <select class="form-control" name="fontFamily" id="select" [(ngModel)]="mainStyle.fontFamily">
+                            <option>Time New Roman</option>
+                            <option>Tahoma</option>
+                            <option>Verdana</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="block3">
+                    <div class="block3__left">
+                        <div class="block3__left__colors">
+                            <button class="me-2 btn btn-warning " (mouseout)="backOfft = false"
+                                (mouseenter)="backOfft = true"
+                                (click)="textColorChange();bgColor = false">Color</button>
+                            <button class="btn  btn-danger" (mouseout)="backOffb = false" (mouseenter)="backOffb = true"
+                                (click)="bgColorChange();textColor = false">BgColor</button>
+                        </div>
+                        <div class="block3__left__tStyle my-3">
+                            <div class="form-group">
+                                <label for="bold" class="me-2">
+                                    <input type="checkbox" name="fontWeightBold" id="bold" value="bold"
+                                        [(ngModel)]="mainStyle.bold">
+                                    Bold text
+                                </label>
+                                <label for="italic">
+                                    <input type="checkbox" name="fontWeightItalic" id="italic" value="italic"
+                                        [(ngModel)]="mainStyle.italic">
+                                    Italic text
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block3__right">
+                        <ng-container *ngIf="textColor">
+                            <div class="color-box" (click)=" textColorChange()">
+                                <div class="all-color color-1" (click)="mainStyle.color = 'cyan'"></div>
+                                <div class="all-color color-2" (click)="mainStyle.color = 'coral'"></div>
+                                <div class="all-color color-3" (click)="mainStyle.color = 'green'"></div>
+                                <div class="all-color color-4" (click)="mainStyle.color = 'salmon'"></div>
+                                <div class="all-color color-5" (click)="mainStyle.color = 'navy'"></div>
+                                <div class="all-color color-6" (click)="mainStyle.color = 'cornflowerblue'">
+                                </div>
+                                <div class="all-color color-7" (click)="mainStyle.color = 'bisque'"></div>
+                                <div class="all-color color-8" (click)="mainStyle.color = 'blueviolet'"></div>
+                                <div class="all-color color-9" (click)="mainStyle.color = 'brown'"></div>
+                                <div class="all-color color-10" (click)="mainStyle.color = 'skyblue'"></div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="bgColor">
+                            <div class="bg-color-box" (click)="bgColorChange()">
+                                <div class="all-bg-color color-1" (click)="mainStyle.bgColor = 'lightcyan'">
+                                </div>
+                                <div class="all-bg-color bg-color-2" (click)="mainStyle.bgColor = 'lightcoral'">
+                                </div>
+                                <div class="all-bg-color bg-color-3" (click)="mainStyle.bgColor = 'lightgreen'">
+                                </div>
+                                <div class="all-bg-color bg-color-4" (click)="mainStyle.bgColor = 'lightsalmon'"></div>
+                                <div class="all-bg-color bg-color-5" (click)="mainStyle.bgColor = 'lightsteelblue'">
+                                </div>
+                                <div class="all-bg-color bg-color-6" (click)="mainStyle.bgColor = 'lightskyblue'"></div>
+                                <div class="all-bg-color bg-color-7"
+                                    (click)="mainStyle.bgColor = 'lightgoldenrodyellow'">
+                                </div>
+                                <div class="all-bg-color bg-color-8" (click)="mainStyle.bgColor = 'lightseagreen'">
+                                </div>
+                                <div class="all-bg-color bg-color-9" (click)="mainStyle.bgColor = 'lightpink'">
+                                </div>
+                                <div class="all-bg-color bg-color-10" (click)="mainStyle.bgColor = 'lightyellow'"></div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </form>
+        </ng-container>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="addStatus">
+    <div class="fours-block container">
+        <div class="fours-block__box1">
+            <div class="form-group">
+                <label for="table" class="me-2">Table</label>
+                <input type="radio" name="choose" id="table" [checked]="this.addCheck.table" (click)="checkTl(true)">
+            </div>
+            <div class="form-group">
+                <label for="list" class="me-2">List</label>
+                <input type="radio" name="choose" id="list" [checked]="this.addCheck.list" (click)="checkTl(false)">
+            </div>
+        </div>
+        <ng-container *ngIf="addCheck.table">
+            <div class="fours-block__box2 col-10">
+                <div class="form-group col-12">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Input count of row:</span>
+                        <input type="number" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" [(ngModel)]="tableData.row" min="1" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Input count of cell:</span>
+                        <input type="number" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" [(ngModel)]="tableData.cell" min="1" required>
+                    </div>
+                </div>
+                <h4 class="m-3">Table style:</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Input width of cell:</span>
+                        <input type="number" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" [(ngModel)]="tableData.width" min="1" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Input height of cell:</span>
+                        <input type="number" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" [(ngModel)]="tableData.height" min="1" required>
+                    </div>
+                </div>
+                <div class="form-group my-3">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Border width:</span>
+                        <input type="number" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" [(ngModel)]="tableData.borderWidth" min="1"
+                            required>
+                    </div>
+                </div>
+                <div class="form-group my-3">
+                    <span>Border type:</span>
+                    <select class="form-control" name="borderType" [(ngModel)]="tableData.borderType">
+                        <option>solid</option>
+                        <option>dashed</option>
+                        <option>double</option>
+                    </select>
+                </div>
+                <div class="form-group my-3">
+                    <span>Border type:</span>
+                    <select class="form-control" name="borderColor" [(ngModel)]="tableData.borderColor">
+                        <option>black</option>
+                        <option>yellow</option>
+                        <option>green</option>
+                    </select>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="addCheck.list">
+            <div class="form-group my-3">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Input count of list items:</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm" [(ngModel)]="listData.lisItems" min="1" required>
+                </div>
+            </div>
+            <div class="form-group my-3">
+                <span>Type of mark:</span>
+                <select class="form-control" name="typeMark" [(ngModel)]="listData.typeMark">
+                    <option>circle</option>
+                    <option>square</option>
+                    <option>disc</option>
+                </select>
+            </div>
+        </ng-container>
+
+
+        <div class="fours-block__box3">
+            <button class="btn btn-success" (click)="addCheck.table?createTable():createList()">Create</button>
+        </div>
+    </div>
+</ng-container>
